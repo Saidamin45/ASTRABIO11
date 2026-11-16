@@ -407,5 +407,40 @@ $('#enter').onclick=()=>{
   $('#intro').classList.add('out');
 };
 
+/* Add Presentation and Demo Video links */
+(function addShowcaseLinks(){
+  const enterButton = $('#enter');
+  if (!enterButton || enterButton.dataset.showcaseLinksAdded === 'true') return;
+
+  const buttonRow = document.createElement('div');
+  buttonRow.className = 'showcase-links';
+
+  const makeLink = (label, href) => {
+    const link = document.createElement('a');
+    link.className = 'showcase-link';
+    link.textContent = label;
+    link.href = href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    return link;
+  };
+
+  const presentation = makeLink(
+    'Presentation',
+    'https://1drv.ms/p/c/a6c0d2e6c831bb83/IQBtSM9t_3DfTpnH2lMW1pJgAeFTd04WLuSDhxvIAMatSzk'
+  );
+
+  const demoVideo = makeLink(
+    'Demo Video',
+    'https://drive.google.com/file/d/1_HOzhH-_YD4_62iPf_KarcGIiEVQm85Z/view?usp=sharing'
+  );
+
+  const parent = enterButton.parentNode;
+  parent.insertBefore(buttonRow, enterButton);
+  buttonRow.append(presentation, enterButton, demoVideo);
+
+  enterButton.dataset.showcaseLinksAdded = 'true';
+})();
+
 /* start the 3D body animation loop */
 if(!BM.raf)BM.raf=requestAnimationFrame(bmFrame);
